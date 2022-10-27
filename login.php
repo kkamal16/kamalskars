@@ -1,37 +1,72 @@
-<?php include('includes/header.php');
+<?php 
+session_start();
+
+
+
+include('includes/header.php');
 	$page_title="Welcome to Kamals Kars"
+  
 ?>
 
-<h2 class="text-center heada hd">Admin login  </h2>
 
-<!-- start of container -->
-<div class="container">
-	<div class="row">
-    	<div class="col-sm-1">
-        content goes here 
-        </div>
-        <div class="col-sm-10">
-        <h2>Log in</h2>
-        <form class="row g-3">
-  <div class="col-md-6">
-    <label for="inputemail" class="form-label">Email</label>
-    <input type="email" class="form-control" id="inputemail">
-  </div>
-  <div class="col-md-6">
-    <label for="inputpassword" class="form-label">Password</label>
-    <input type="password" class="form-control" id="inputpassword">
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Log in</button>
-  </div>
-    </form>
-        </div>
-        <div class="col-sm-1">
-        content goes here
-   `	</div>
-   </div>
-</div>
+
+
 
 <?php
-include('includes/footer.php');
+	session_start();
+	
 ?>
+
+<html>
+	<head>
+		<title>User Login and Registration</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		
+	</head>
+	<body>
+		<div class="container">
+		<div class="login-box">
+			<div class="row">
+				<div class="col-md-6 login-left">
+					<h2> Login Here </h2>
+					<form action="validation.php" method="post">
+						<div class="form-group">
+							<label>Username</label>
+							<input type="text" name="user" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" name="password" class="form-control" required>
+						</div>
+						<button type="submit" class="btn btn-primary"> Login </button>			
+					</form>
+				</div>
+				
+                <div class="col-md-6 login-right">
+					<h2> Register Here if you havent yet registered</h2>
+					<form action="registration.php" method="post">
+						<div class="form-group">
+							<label>Username</label>
+							<input type="text" name="user" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" name="password" class="form-control" required>
+						</div>
+						<button type="submit" class="btn btn-primary"> Register </button>			
+					</form>
+				</div>
+			</div>
+		</div>		
+		</div>
+		
+	</body>
+	
+	
+</html>
+
+
+
+
+

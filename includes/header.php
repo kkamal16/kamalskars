@@ -36,9 +36,6 @@
         <a class="nav-link" href="marketplace.php">Marketplace</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="signup.php">Sign up</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="login.php">Log in</a>
       </li>
       <li class="nav-item">

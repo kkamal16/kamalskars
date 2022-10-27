@@ -1,6 +1,12 @@
-<?php include('includes/header.php');
-	$page_title="Welcome to Kamals Kars"
+<?php 
+
+
+include('includes/header.php');
+$page_title="Welcome to Kamals Kars"
+
 ?>
+
+
 
 <h2 class="text-center heada hd">Kamals Kars</h2>
 

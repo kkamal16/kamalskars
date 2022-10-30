@@ -1,63 +1,111 @@
-<?php 
-
-
-include('includes/header.php');
-$page_title="Welcome to Kamals Kars"
-
-?>
-
-
-
-<h2 class="text-center heada hd">Kamals Kars</h2>
-
-<!-- Carousel -->
-
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="images/carousel1.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="images/carousel2.jpeg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="images/carousel3.jpg" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-<!-- Carousel -->
-
-<!-- start of container -->
-<div class="container">
-	<div class="row">
-    	<div class="col-sm-2">
-
-        </div>
-        <div class="col-sm-8">
-        <h2>Welcome</h2>
-        What is Lorem Ipsum? doghezghtroyhe89y
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </div>
-        <div class="col-sm-2">
-  
-   	  </div>
-  </div>
-</div>
-
 <?php
-include('includes/footer.php');
+  session_start();
+  require 'dbcon.php';
+  if(!isset($_SESSION['username'])){
+    header('location:login.php');
+  }
+
 ?>
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+    <div class="containter mt-4">
+      <?php include('message.php'); ?>
+
+
+      <!-- Main car table -->
+      <div  class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="text-center heada hd">Welcome <?php echo $_SESSION['username']; ?>  
+              <a href="car-create.php" class="btn btn-info btn-sm">Add a car</a>
+              <a href="car-search.php" class="btn btn-success btn-sm">Search for a car</a> <!-- #btn-success makes the colour of the button green -->
+              <a href="home.php" class="btn btn-danger btn-sm">BACK</a>
+              <a href="logout.php" button type="submit" class="btn btn-danger float-end">Logout</a> <!-- #btn-danger makes the colour of the button red -->
+              </h4>
+
+            </div>
+            <div class="card-body">
+
+              <table class="table table-boardered table-striped">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <?php
+
+                    $query = "SELECT * FROM cars";
+                    $query_run = mysqli_query($con, $query);
+
+                    if(mysqli_num_rows($query_run) >0)
+                    {
+                      foreach($query_run as $car)
+                      {
+                        ?>
+                        <tr>
+                          <td><?= $car['id']; ?> </td>   <!-- Filling out the table with all the details of the cars -->
+                          <td><?= $car['image'];?> </td>
+                          <td><?= $car['make']; ?> </td>
+                          <td><?= $car['model']; ?> </td>
+                          <td><?= $car['year']; ?> </td>
+                          <td><?= $car['price']; ?> </td>
+                          <td>
+                              <a href="car-view.php?id=<?= $car['id']; ?>" class="btn btn-info btn-sm">View</a>
+                              <a href="car-edit.php?id=<?= $car['id']; ?>" class="btn btn-success btn-sm">Edit</a> <!-- #btn-success makes the colour of the button green -->
+                              <form action="code.php" method="POST" class="d-inline">  <!-- The function of the buttons is code.php -->
+                                <button type="submit" name="delete_car" value="<?= $car['id']; ?>" class="btn btn-danger btn-sm">Delete</a> <!-- #btn-danger makes the colour of the button red -->
+
+                              </form>
+                          </td>
+                        </tr>
+                        <?php
+                      }
+                    }
+                    else
+                    {
+                      echo "<h5> No record found </h5>";
+                    }
+                  ?>
+  
+
+                </tbody>
+              </table>
+        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  </body>
+</html>

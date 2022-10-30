@@ -1,28 +1,31 @@
 <?php
-	
+
 session_start();
 
 
+$con = mysqli_connect("localhost","root","root","kamals_kars");  #connection to the database
 
-$con = mysqli_connect('localhost', 'root', 'root');
 
-mysqli_select_db($con, 'admin');
+mysqli_select_db($con, 'kamals_kars');
 
 $name = $_POST['user'];
-$pass = $_POST['password'];
+$password = $_POST['password'];
 
-$s = " select * from admin_details where user = '$name' && password = '$pass'";
+$s = "select * from usertable where name = '$name' && password = '$password'";
 
 $result = mysqli_query($con, $s);
 
 $num = mysqli_num_rows($result);
 
-if($num == 1) {
-	$_SESSION['user'] = $name;
-	header('location:index.php');
-}else{
-	header('location:login.php');
-}	
-	
-?>	
+if($num ==1){       #making sure that the user exists when they are logging on.
+    $_SESSION['username'] = $name;
+    header('location:home.php');
 
+}
+else{    #if the user doesnt exist then it will take them back to the login page
+    header('location:login.php');
+
+    
+}
+
+?>

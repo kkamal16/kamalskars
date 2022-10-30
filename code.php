@@ -11,13 +11,13 @@ if(isset($_POST['delete_car']))
 
     if($query_run)
     {
-        $_SESSION['message'] = "car Deleted Successfully";
+        $_SESSION['message'] = "Car Deleted Successfully";
         header("Location: index.php");
         exit(0);
     }
     else
     {
-        $_SESSION['message'] = "car Not Deleted";
+        $_SESSION['message'] = "Car Not Deleted";
         header("Location: index.php");
         exit(0);
     }    
@@ -46,13 +46,13 @@ if(isset($_POST['update_car']))   #if update student gets clicked then this happ
 
     if($query_run)
     {
-        $_SESSION['message'] = "car Updated Successfully";
+        $_SESSION['message'] = "Car Updated Successfully";
         header("Location: index.php");
         exit(0);
     }
     else
     {
-        $_SESSION['message'] = "car Not updated";
+        $_SESSION['message'] = "Car Not updated";
         header("Location: index.php");
         exit(0);
     }
@@ -77,14 +77,14 @@ if(isset($_POST['save_car']))
     $query_run = mysqli_query($con, $query);  
     if($query_run)
     {
-        $_SESSION['message'] = "student Created Successfully";
+        $_SESSION['message'] = "Car Created Successfully";
         header("Location: index.php");
         exit(0);
 
     }
     else
     {
-        $_SESSION['message'] = "student not created";
+        $_SESSION['message'] = "Car not created";
         header("Location: car-create.php");
         exit(0);
     }
